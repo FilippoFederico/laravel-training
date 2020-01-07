@@ -22,6 +22,15 @@ class CustomerController extends Controller
 
     public function store()
     {
-        dd(request('name'));
+        $data = request()->validate([
+            'name' => 'required|min:3'
+        ]);
+
+        // saving new input value
+        $customer = new Customer();
+        $customer->name = request('name'); // the name is located in > request('name')
+        $customer->save(); // then save it
+
+        return back();
     }
 }
