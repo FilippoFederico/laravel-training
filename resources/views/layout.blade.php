@@ -4,25 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My first Laravel project</title>
+
+    <title>@yield('title', 'Learning Laravel 5.8 - Default title')</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 <body>
-<ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link active" href="/">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="contact">Contact</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="customers">Customer List</a>
-  </li>
-</ul>
 
     <div class="container">
-        @yield('content')
+      @include('nav') 
+      <!-- we can also pass data by include > @include('nav', ['username' => 'cool_user'])  -->
+      @yield('content')
     </div>
     
 </body>
