@@ -12,8 +12,8 @@ class CustomerController extends Controller
         // > Customer::all();
 
         // deleting > Customer::all(); we set variables getting results on active 1 or 0
-        $activeCustomers = Customer::where('active', 1)->get();
-        $inactiveCustomers = Customer::where('active', 0)->get();
+        $activeCustomers = Customer::active()->get();
+        $inactiveCustomers = Customer::inactive()->get();
 
         // dd($inactiveCustomers);
     
@@ -30,15 +30,7 @@ class CustomerController extends Controller
 
         ]);
 
-        // saving new input value
-        $customer = new Customer();
-
-        $customer->name = request('name'); // storing data name
-        $customer->email = request('email'); // storing data email
-        $customer->active = request('active'); // storing data active
-
-
-        $customer->save(); // then save it
+        Customer::create($data);
 
         return back();
     }
