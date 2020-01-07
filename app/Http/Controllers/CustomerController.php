@@ -11,18 +11,23 @@ class CustomerController extends Controller
         // firstly setting by > php artisan tinker
         // > Customer::all();
 
-        $customers = Customer::all();
+        // deleting > Customer::all(); we set variables getting results on active 1 or 0
+        $activeCustomers = Customer::where('active', 1)->get();
+        $inactiveCustomers = Customer::where('active', 0)->get();
+
+        // dd($inactiveCustomers);
     
-        return view('internals.customers', [
-            'customers' => $customers,
-        ]);
+        // using compact() to pass data/variables ('activeCustomers', 'inactiveCustomers') to a view
+        return view('internals.customers', compact('activeCustomers', 'inactiveCustomers'));
     } 
 
     public function store()
     {
         $data = request()->validate([
             'name' => 'required|min:3', // required min 3 characters
-            'email' => 'required|email' // required email format with @ (not just random text)
+            'email' => 'required|email', // required email format with @ (not just random text)
+            'active' => 'required' 
+
         ]);
 
         // saving new input value
@@ -30,6 +35,8 @@ class CustomerController extends Controller
 
         $customer->name = request('name'); // storing data name
         $customer->email = request('email'); // storing data email
+        $customer->active = request('active'); // storing data active
+
 
         $customer->save(); // then save it
 

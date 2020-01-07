@@ -26,6 +26,15 @@
                 <div>{{ $errors->first('email') }}</div>
             </div>
 
+            <div class="form-group">
+                <label for="active">Status:</label>
+                <select name="active" id="active" class="form-control">
+                    <option value="" disabled>Select customer status</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+            </div>
+
             <button type="submit" class="btn btn-primary">Add Customer</button>
 
         @csrf
@@ -37,11 +46,21 @@
 <hr>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-6">
+        <h3>Active Customers:</h3>
         <ul>
     <!-- from array in routes > web.php -->
-        @foreach ($customers as $customer)
-            <li>{{ $customer->name }} <span class="text-muted">({{ $customer->email }})</span></li>
+        @foreach ($activeCustomers as $activeCustomers)
+            <li>{{ $activeCustomers->name }} <span class="text-muted">({{ $activeCustomers->email }})</span></li>
+        @endforeach
+        </ul>
+    </div>
+    <div class="col-6">
+        <h3>Inactive Customers:</h3>
+        <ul>
+    <!-- from array in routes > web.php -->
+        @foreach ($inactiveCustomers as $inactiveCustomers)
+            <li>{{ $inactiveCustomers->name }} <span class="text-muted">({{ $inactiveCustomers->email }})</span></li>
         @endforeach
         </ul>
     </div>
